@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Flocking Object - Properties</title>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+</head>
+<body bgcolor="#FFFFFF">
+<p align="center"><font size="+3">Flocking Object - Properties</font></p>
+
+
+<h2>Flocking object setup</h2>
+
+<h3>Cell size</h3>
+<p>
+	The Cell size is propbably the most confusing setting since it has no direct effect on anything visible to you as a user of the object
+	but it has an inpact on performance.<br />
+	It comes from the idea that the Flocking object splits the entire playfield up into evently sized 'Cells' or squares if you will.<br />
+	When the flocking object looks for neighbouring boids it only looks in the nearby cells to the object for performance reasons.<br />
+	The smaller the cell size you set and the larger the view radius &rarr; the more cells the flocking object has to inspect.<br />
+	The larger the cell size and the smaller the view radius &rarr; the less cells it has to inspect.<br />
+	It doesn't mean that you should chose the latter over the former as the larger the cell-size the more boids can be inside
+	them and it would still slow down.<br /><br />
+	A general rule of thumb will be to set the cell size to something slightly larger than twice the view-radius of the most
+	common boid you have in your game/application.
+</p>
+
+<h3>Default boid parameters</h3>
+<p>These boid settings are the ones that all boid-types have at the start of the frame.</p>
+<p>You have to manually set the boid-type attributes for other boid-types in the event editor when needed.</p>
+<p>
+	The idle speed is the speed a boid will move when it has nothing else to do.
+	It isn't the same as the minimum speed as the object can still stop if it encounters an obstacle and/or cannot move anywhere.
+</p>
+<p>
+	The minimum speed is as the name suggests the lowest speed a boid can move. Usually you set this to 0, but if you want boids that can
+	never stop moving you can set this setting to something greater than 0.<br />
+	An unusual side-effect of setting the minimum speed to a negative value allows your boids to occasionally move in reverse motion -
+	especially if the boids have slow turn speed and they are attracted towards a point behind them.
+	They will then slow down, reverse motion while turning and then accelerating forwards again - almost like a car does a 3-point turn.
+</p>
+<p>
+	Again - as the name suggests the 'Max speed' is the absolute maximum speed a boid can move (in pixels per time unit)
+<p>
+<p>
+	Acceleration and deceleration values can be used for making the boids
+	change speed in a smoother fashion instead of instantly changing speeds.
+</p>
+<p>
+	The view radius of a boid is the maximum distance a boid can see when it plans its movement.<br />
+	This view radius has an impact on the performance of the Flocking object. See the information on the 'Cell size' property for more info.
+</p>
+<p>
+	The avoidance radius denotes the boid "personal space" - or the closest distance a boid prefers being to other boids.
+	If the boid is closer to other boids than the avoidance radius it will seek to move away from them.
+</p>
+<p>
+	The randomization of a boid-type is how much random 'force' is applied to the boids every event-loop.
+	Too much randomization will cause them to move completely irregular and will steer into each other.
+</p>
+<p>
+	The angle mode sets how the Flocking object will modify the boid-objects direction or angle.
+	Setting it to 'angle' will set the object angle for smooth 360 degree rotations.
+	Setting it to 'direction' will only use 32 directions.
+</p>
+<p>
+	If the 'Avoid obstacles' setting is set for a boid-type they will steer clear of any backdrop obstacles in the level.
+	They will scan the area in front of them (to the avoidance radius) for obstacles and move away from them if they encounter them.
+</p>
+
+<h3>Default weights</h3>
+<p>
+	Boids move using 3 different rules:
+</p>
+<ul>
+	<li>Separation - Boids will move away from other boids (of any type) if they are too close.</li>
+	<li>Alignment - Boids will try to move in the same direction as it's flockmates (nearby boids of the same type)</li>
+	<li>Cohesion - Boids will try to position themselves at the average position of it's flockmates (nearby boids of the same type)</li>
+</ul>
+<p>
+	How they move based on these rules are determined by a floating point value; a weight value.
+	The size of this value affects how much the boids prioritiezes these rules.
+	A weight of 0 means that they will ignore the rule completely.
+</p>
+
+</body>
+</html>

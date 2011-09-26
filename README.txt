@@ -1,0 +1,2 @@
+Create big swarms, schools or flocks of objects (boids) with this Multimedia Fusion 2 extension.
+Very customizable and makes it possible for you to create beautiful special effects or interesting game mechanics.

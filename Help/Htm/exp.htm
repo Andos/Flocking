@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Flocking Object - Expressions</title>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+</head>
+<body bgcolor="#FFFFFF">
+<p align="center"><font size="+3">Flocking Object - Expressions</font></p>
+
+<b>Overview:</b>
+<ul>
+	<li><a href="#getattribs">Getting boid-type attributes</a></li>
+	<li><a href="#fromfixed">From object (via fixed value)</a></li>
+	<li><a href="#fromlooped">From currently looped boid</a></li>
+</ul>
+</p>
+<p>&nbsp;</p>
+
+<a name="getattribs">
+<h2>Getting boid-type attributes</h2>
+
+<b>Get idle speed</b>
+<br />Expression:
+<blockquote><p>
+	<b>IdleSpeed("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The idle speed attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+<b>Get min speed</b>
+<br />Expression:
+<blockquote><p>
+	<b>MinSpeed("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The minimum speed attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+<b>Get max speed</b>
+<br />Expression:
+<blockquote><p>
+	<b>MinSpeed("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The maximum speed attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+<b>Get acceleration</b>
+<br />Expression:
+<blockquote><p>
+	<b>Acceleration("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The acceleration attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+<b>Get deceleration</b>
+<br />Expression:
+<blockquote><p>
+	<b>Deceleration("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The deceleration attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+<b>Get turn speed</b>
+<br />Expression:
+<blockquote><p>
+	<b>TurnSpeed("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The turn speed attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+<b>Get view radius</b>
+<br />Expression:
+<blockquote><p>
+	<b>ViewRadius("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The view radius attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+<b>Get avoidance radius</b>
+<br />Expression:
+<blockquote><p>
+	<b>AvoidanceRadius("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The avoidance radius attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+<b>Get movement radomization</b>
+<br />Expression:
+<blockquote><p>
+	<b>MovementRandomization("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The movement randomization attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+<b>Get separation weight</b>
+<br />Expression:
+<blockquote><p>
+	<b>SeperationWeight("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The separation weight attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+<b>Get alignment weight</b>
+<br />Expression:
+<blockquote><p>
+	<b>AlignmentWeight("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The alignment weight attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+<b>Get cohesion weight</b>
+<br />Expression:
+<blockquote><p>
+	<b>CohesionWeight("Flocking", &gt;boidtype&lt;)</b></p>
+	<b>boidtype</b> -	The boid-type from which to get the attribute value</p>
+</blockquote>
+<p><b>Returns:</b> The cohesion weight attribute from the given boid type.</p>
+<p>&nbsp;</p>
+
+
+<a name="fromfixed">
+<h2>From object (via fixed value)</h2>
+
+<b>Get angle</b>
+<br />Expression:
+<blockquote><p>
+	<b>AngleFromFixed("Flocking", &gt;fixed value&lt;)</b></p>
+	<b>fixed value</b> -	The fixed value of the object from which to get the value</p>
+</blockquote>
+<p><b>Returns:</b> The current angle of the object.</p>
+<p>&nbsp;</p>
+
+<b>Get speed</b>
+<br />Expression:
+<blockquote><p>
+	<b>SpeedFromFixed("Flocking", &gt;fixed value&lt;)</b></p>
+	<b>fixed value</b> -	The fixed value of the object from which to get the value</p>
+</blockquote>
+<p><b>Returns:</b> The current speed of the object (in pixels per time unit)</p>
+<p>&nbsp;</p>
+
+<b>Get X-speed</b>
+<br />Expression:
+<blockquote><p>
+	<b>XSpeedFromFixed("Flocking", &gt;fixed value&lt;)</b></p>
+	<b>fixed value</b> -	The fixed value of the object from which to get the value</p>
+</blockquote>
+<p><b>Returns:</b> The current X-speed of the object (in pixels per time unit)</p>
+<p>&nbsp;</p>
+
+<b>Get Y-speed</b>
+<br />Expression:
+<blockquote><p>
+	<b>YSpeedFromFixed("Flocking", &gt;fixed value&lt;)</b></p>
+	<b>fixed value</b> -	The fixed value of the object from which to get the value</p>
+</blockquote>
+<p><b>Returns:</b> The current Y-speed of the object (in pixels per time unit)</p>
+<p>&nbsp;</p>
+
+<b>Get target X</b>
+<br />Expression:
+<blockquote><p>
+	<b>TargetXFromFixed("Flocking", &gt;fixed value&lt;)</b></p>
+	<b>fixed value</b> -	The fixed value of the object from which to get the value</p>
+</blockquote>
+<p><b>Returns:</b> The X coordinate relative to the object where the object aims to move towards.</p>
+<p>&nbsp;</p>
+
+<b>Get target Y</b>
+<br />Expression:
+<blockquote><p>
+	<b>TargetYFromFixed("Flocking", &gt;fixed value&lt;)</b></p>
+	<b>fixed value</b> -	The fixed value of the object from which to get the value</p>
+</blockquote>
+<p><b>Returns:</b> The Y coordinate relative to the object where the object aims to move towards.</p>
+<p>&nbsp;</p>
+
+
+
+
+
+<a name="fromlooped">
+<h2>From currently looped boid</h2>
+
+<b>Get angle</b>
+<br />Expression:
+<blockquote><b>AngleFromCurrent("Flocking")</b></blockquote>
+<p><b>Returns:</b> The current angle of the currently looped object.</p>
+<p>&nbsp;</p>
+
+<b>Get speed</b>
+<br />Expression:
+<blockquote><b>SpeedFromCurrent("Flocking")</b></blockquote>
+<p><b>Returns:</b> The current speed of the currently looped object (in pixels per time unit)</p>
+<p>&nbsp;</p>
+
+<b>Get X-speed</b>
+<br />Expression:
+<blockquote><b>XSpeedFromCurrent("Flocking")</b></blockquote>
+<p><b>Returns:</b> The current X-speed of the currently looped object (in pixels per time unit)</p>
+<p>&nbsp;</p>
+
+<b>Get Y-speed</b>
+<br />Expression:
+<blockquote><b>YSpeedFromCurrent("Flocking")</b></blockquote>
+<p><b>Returns:</b> The current Y-speed of the currently looped object (in pixels per time unit)</p>
+<p>&nbsp;</p>
+
+<b>Get target X</b>
+<br />Expression:
+<blockquote><b>TargetXFromCurrent("Flocking")</b></blockquote>
+<p><b>Returns:</b> The X coordinate relative to the currently looped object where the object aims to move towards.</p>
+<p>&nbsp;</p>
+
+<b>Get target Y</b>
+<br />Expression:
+<blockquote><b>TargetYFromCurrent("Flocking")</b></blockquote>
+<p><b>Returns:</b> The Y coordinate relative to the currently looped object where the object aims to move towards.</p>
+<p>&nbsp;</p>
+
+
+
+</body>
+</html>

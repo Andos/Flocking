@@ -1,0 +1,27 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=..\ToInstall\Files\Help\Flocking.chm
+Contents file=ext_cnt.hhc
+Default Font=Arial,8,0
+Default Window=Default
+Default topic=htm\index.htm
+Display compile progress=Yes
+Full-text search=Yes
+Index file=ext_index.hhk
+Language=0x409 English (United States)
+Title=Flocking object Help
+
+[WINDOWS]
+Default="Flocking object Help","ext_cnt.hhc","ext_index.hhk","htm\index.htm","htm\index.htm",,,,,0x62420,,0x384e,[0,0,640,480],,,,,,,0
+
+
+[FILES]
+htm\index.htm
+htm\desc.htm
+htm\prop.htm
+htm\act.htm
+htm\cnd.htm
+htm\exp.htm
+
+[INFOTYPES]
+

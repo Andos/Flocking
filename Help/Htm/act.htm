@@ -1,0 +1,443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Flocking Object - Actions</title>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+</head>
+<body bgcolor="#FFFFFF">
+<p align="center"><font size="+3">Flocking - Actions</font></p>
+
+<b>Overview:</b>
+<ul>
+	<li><a href="#addremove">Adding and removing boids</a></li>
+	<li><a href="#setattribs">Setting boid-type attributes</a></li>
+	<li><a href="#controlboids">Controlling boids</a></li>
+		<ul>
+			<li><a href="#alloftype">All of type</a></li>
+			<li><a href="#withinradius">Within radius</a></li>
+			<li><a href="#singleboids">Single boids</a></li>
+		</ul>
+	<li><a href="#loopboids">Looping through boids</a></li>
+</ul>
+</p>
+<p>&nbsp;</p>
+
+<a name="addremove">
+<h2>Adding and removing boids</h2>
+
+<b>Add object as boid</b>
+<br />Parameters:
+<blockquote>
+	<b>Object</b>	-	Which object the Flocking object should take control over<br />
+	<b>boid type</b> -	The number identifying the boid-type of the object
+</blockquote>
+<p>
+Makes the Flocking object take control over the object.
+The object will move and behave depending on the boid type attributes given for the given boid type.<br />
+Note: You cannot add an object twice. A second add is silently ignored.
+</p>
+<p>&nbsp;</p>
+
+<b>Remove object</b>
+<br />Parameters:
+<blockquote>
+	<b>Object</b>	-	Which object the Flocking object should stop controlling<br />
+</blockquote>
+<p>
+Removes the object from the Flocking object's internal list of object it should control.<br />
+Note: You don't have to do this before destroying your objects, Flocking object will detect which objects have been destroyed.
+</p>
+<p>&nbsp;</p>
+
+<a name="setattribs">
+<h2>Setting boid attributes</h2>
+
+<b>Set idle speed</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's idle speed changed<br />
+	<b>Speed</b>	-	Decimal speed value. Measured in pixels per time unit.<br />
+</blockquote>
+<p>
+Changes the idle speed of all the boids with the given boid type number.<br />
+The idle speed is the speed a boid will move with when it has nothing else to do.
+It functions somewhat the same as the minimum speed, but this value isn't enforced.
+</p>
+<p>&nbsp;</p>
+
+<b>Set min speed</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's min speed changed<br />
+	<b>Speed</b>	-	Decimal speed value. Measured in pixels per time unit.<br />
+</blockquote>
+<p>
+Changes the minimum speed of all the boids with the given boid type number.<br />
+Note: If the minimum speed is negative it allows the boids to reverse their movement.<br />
+Using a negative minimum speed is useful for simulating vehicles reversing their movement before turning towards their destination.
+</p>
+<p>&nbsp;</p>
+
+<b>Set max speed</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's max speed changed<br />
+	<b>Speed</b>	-	Decimal speed value. Measured in pixels per time unit.<br />
+</blockquote>
+<p>
+Sets the maximum speed of all the boids with the given boid type number.<br />
+</p>
+<p>&nbsp;</p>
+
+
+<b>Set acceleration</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's acceleration changed<br />
+	<b>Acceleration</b>	-	Decimal acceleration value. Measured in change in pixels per time unit.<br />
+</blockquote>
+<p>
+Sets the maximum change in speed each time unit while the boids increases their speed.<br />
+Note: This value isn't a relative percentage of the max speed
+- so if you wish that you must adjust this acceleration to some percentage of your max speed if it changes.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Set deceleration</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's deceleration changed<br />
+	<b>Deceleration</b>	-	Decimal deceleration value. Measured in change in pixels per time unit.<br />
+</blockquote>
+<p>
+Sets the maximum change in speed each time unit while the boids decreases their speed.<br />
+Note: This value isn't a relative percentage of the max speed
+- so if you wish that you must adjust this deceleration to some percentage of your max speed if it changes.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Set turn speed</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's turn speed changed<br />
+	<b>Angular speed</b>	-	Decimal value. Measured in change in angles per time unit.<br />
+</blockquote>
+<p>
+Sets the maximum change in a boid's angle each time unit.<br />
+Should usually be between [0..180] for any sensible results.
+A value of 180 means that it can turn 180 degrees in one instant.
+</p>
+<p>&nbsp;</p>
+
+<b>Set view radius</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's view radius changed<br />
+	<b>Radius</b>	-	Decimal value. Maximum distance a boid can see.<br />
+</blockquote>
+<p>
+Sets the maximum distance the boids can see.<br />
+Affects their movement in the sense that they will not move towards other boids
+if they are outside the view radius.
+<br />
+Performance note: The larger the view radius the more CPU power the extension needs.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Set avoidance radius</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's avoidance radius changed<br />
+	<b>Radius</b>	-	Decimal value. The distance when a boid begins to steer clear of others<br />
+</blockquote>
+<p>
+Sets the minimum distance a boid prefers being away from other boids. Kind of a boid "personal space".<br />
+Note: The avoidance radius only has an effect if it is smaller than the view radius.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Set movement randomization</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's movement randomization changed<br />
+	<b>Noise size</b>	-	Decimal value. The larger the value the more jittery the boids will move<br />
+</blockquote>
+<p>
+By default the boids are 100% deterministic; they will always move the same way if the environment is the same.
+You can remove this deterministic behavior by setting a small movement randomization value.<br />
+It works by applying a random directional force to the boid every frame.
+The larger the value the more jittery the boid will become.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Set separation weight</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's separation weight changed<br />
+	<b>Weight value</b>	-	Decimal value. The larger the value the more the boids will prioritize avoiding each other<br />
+</blockquote>
+<p>
+Sets how much directional force is applied to the boids when they are closer to other boids than their avoidance radius.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Set alignment weight</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's alignment weight changed<br />
+	<b>Weight value</b>	-	Decimal value. The larger the value the more the boids will prioritize heading the same direction as their flockmates<br />
+</blockquote>
+<p>
+Sets how much a boid prioritizes heading the same direction as their flockmates
+</p>
+<p>&nbsp;</p>
+
+
+<b>Set cohesion weight</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's cohesion weight changed<br />
+	<b>Weight value</b>	-	Decimal value. The larger the value the more the boids will prioritize positioning themselves at the average position of their flockmates<br />
+</blockquote>
+<p>
+Sets how much a boid prioritizes positioning themselves at the average position of their flockmates.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Set angle/dir setting</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should have it's angle/dir setting changed<br />
+	<b>Angle/Dir</b>	-	0 = use angles, 1 = use directions<br />
+</blockquote>
+<p>
+Sets if the flocking object should change the object's angle or direction value as it moves around.
+</p>
+<p>&nbsp;</p>
+
+<a name="controlboids">
+<h2>Controlling boids</h2>
+<a name="alloftype">
+<h3>All of type</h3>
+
+<b>Attract towards position</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should be affected<br />
+	<b>X-position</b>	-	X-position to be attracted towards<br />
+	<b>Y-position</b>	-	Y-position to be attracted towards<br />
+	<b>Weight</b>		-	How much the boid should be attracted towards this position<br />
+</blockquote>
+<p>
+Causes all boids in the Flocking object with the given boid type to be attracted towards the position regardless of distance.
+</p>
+<p>&nbsp;</p>
+
+<b>Chase away from position</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should be affected<br />
+	<b>X-position</b>	-	X-position the boids should chase away from<br />
+	<b>Y-position</b>	-	Y-position the boids should chase away from<br />
+	<b>Weight</b>		-	How much the boid should be repelled away from this position<br />
+</blockquote>
+<p>
+Causes all boids in the Flocking object with the given boid type to flee away from the position regardless of distance.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Apply force</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should be affected<br />
+	<b>X-force</b>		-	X-force which should be applied<br />
+	<b>Y-force</b>		-	Y-force which should be applied<br />
+</blockquote>
+<p>
+Manually applies a X/Y force to the boids in cartesian coordinates.<br />
+A positive x-force will for example cause the boids to move to the right.
+The larger the value the more the direction is prioritized.
+</p>
+<p>&nbsp;</p>
+
+<a name="withinradius">
+<h3>Within radius</h3>
+
+<b>Attract towards position</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should be affected<br />
+	<b>X-position</b>	-	X-position to be attracted towards<br />
+	<b>Y-position</b>	-	Y-position to be attracted towards<br />
+	<b>Radius</b>		-	The radius of the circle where boids will be affected<br />
+	<b>Weight</b>		-	How much the boid should be attracted towards this position<br />
+</blockquote>
+<p>
+Causes all boids within the defined circle with the given boid type to be attracted towards the position.
+The weight has a linear falloff from the center so boids at the edge of the cirle is less affected than the ones closer to the center.
+</p>
+<p>&nbsp;</p>
+
+<b>Chase away from position</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should be affected<br />
+	<b>X-position</b>	-	X-position the boids should chase away from<br />
+	<b>Y-position</b>	-	Y-position the boids should chase away from<br />
+	<b>Radius</b>		-	The radius of the circle where boids will be affected<br />
+	<b>Weight</b>		-	How much the boid should be repelled away from this position<br />
+</blockquote>
+<p>
+Causes all boids within the defined circle with the given boid type to flee away from the position.
+The weight has a linear falloff from the center so boids at the edge of the cirle is less affected than the ones closer to the center.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Apply force</b>
+<br />Parameters:
+<blockquote>
+	<b>Boid type</b>	-	Which boid type should be affected<br />
+	<b>X-position</b>	-	X-position the boids should chase away from<br />
+	<b>Y-position</b>	-	Y-position the boids should chase away from<br />
+	<b>Radius</b>		-	The radius of the circle where boids will be affected<br />
+	<b>X-force</b>		-	X-force which should be applied<br />
+	<b>Y-force</b>		-	Y-force which should be applied<br />
+</blockquote>
+<p>
+Manually applies a X/Y force to the boids within the circle <br />
+A positive x-force will for example cause the boids to move to the right.
+The larger the value the more the direction is prioritized.
+The force has a linear falloff from the center so boids at the edge of the cirle is less affected than the ones closer to the center.
+</p>
+<p>&nbsp;</p>
+
+<a name="singleboids">
+<h3>Single boids</h3>
+
+<b>Attract towards position</b>
+<br />Parameters:
+<blockquote>
+	<b>Object</b>		-	Which object should be affected<br />
+	<b>X-position</b>	-	X-position to be attracted towards<br />
+	<b>Y-position</b>	-	Y-position to be attracted towards<br />
+	<b>Weight</b>		-	How much the boid should be attracted towards this position<br />
+</blockquote>
+<p>
+Causes an invidual object to be attracted towards the position with the given weight.
+</p>
+<p>&nbsp;</p>
+
+<b>Chase away from position</b>
+<br />Parameters:
+<blockquote>
+	<b>Object</b>		-	Which object should be affected<br />
+	<b>X-position</b>	-	X-position the boid should chase away from<br />
+	<b>Y-position</b>	-	Y-position the boid should chase away from<br />
+	<b>Weight</b>		-	How much the boid should be repelled away from this position<br />
+</blockquote>
+<p>
+Causes an invidual object to flee away from the position regardless of distance.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Apply force</b>
+<br />Parameters:
+<blockquote>
+	<b>Object</b>		-	Which object should be affected<br />
+	<b>X-force</b>		-	X-force which should be applied<br />
+	<b>Y-force</b>		-	Y-force which should be applied<br />
+</blockquote>
+<p>
+Manually applies a X/Y force to the boid<br />
+A positive x-force will for example cause the boid to move to the right.
+The larger the value the more the direction is prioritized.
+</p>
+<p>&nbsp;</p>
+
+
+
+
+<a name="loopboids">
+<h2>Looping through boids</h2>
+
+<b>Loop all boids</b>
+<br />Parameters:
+<blockquote>
+	<b>Loop name</b>	-	A string name for the loop<br />
+</blockquote>
+<p>
+Starts a for-each like fastloop.<br />
+Will trigger the event 'On looped boid' for each boid in the Flocking object.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Loop all boids of type</b>
+<br />Parameters:
+<blockquote>
+	<b>Loop name</b>	-	A string name for the loop<br />
+	<b>Boid type</b>	-	Which boid type should be looped<br />
+</blockquote>
+<p>
+Starts a for-each like fastloop.<br />
+Will trigger the event 'On looped boid' for each boid in the Flocking object with the given boid-type.
+</p>
+<p>&nbsp;</p>
+
+
+<b>Loop neighbour boids</b>
+<br />Parameters:
+<blockquote>
+	<b>Loop name</b>	-	A string name for the loop<br />
+	<b>Object</b>		-	Which object should have it's neighbours looped<br />
+	<b>Radius</b>		-	The radius of the circle around the boid<br />
+</blockquote>
+<p>
+Starts a for-each like fastloop.<br />
+Will trigger the event 'On looped boid' for each boid within the radius of the given object.<br />
+Note: The object itself will not be looped
+</p>
+<p>&nbsp;</p>
+
+
+<b>Loop boids in radius</b>
+<br />Parameters:
+<blockquote>
+	<b>Loop name</b>	-	A string name for the loop<br />
+	<b>X-position</b>	-	X-position of the center of the circle<br />
+	<b>Y-position</b>	-	Y-position of the center of the circle<br />
+	<b>Radius</b>		-	The radius of the circle<br />
+</blockquote>
+<p>
+Starts a for-each like fastloop.<br />
+Will trigger the event 'On looped boid' for each boid within the circle<br />
+</p>
+<p>&nbsp;</p>
+
+<b>Loop boids in rectangle</b>
+<br />Parameters:
+<blockquote>
+	<b>Loop name</b>	-	A string name for the loop<br />
+	<b>X-position</b>	-	X-position of the center of the circle<br />
+	<b>Y-position</b>	-	Y-position of the center of the circle<br />
+	<b>Width</b>		-	Width of the rectangle<br />
+	<b>Height</b>		-	Height of the rectangle<br />
+</blockquote>
+<p>
+Starts a for-each like fastloop.<br />
+Will trigger the event 'On looped boid' for each boid within the rectangle<br />
+</p>
+
+</body>
+</html>

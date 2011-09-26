@@ -1,0 +1,477 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "..\..\Inc\ccx.h"
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+1 VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x0L
+#ifdef _DEBUG
+ FILEFLAGS 0x21L
+#else
+ FILEFLAGS 0x20L
+#endif
+ FILEOS 0x10001L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Anders Riggelsen"
+            VALUE "FileDescription", "Flocking object"
+            VALUE "FileVersion", "2.00"
+            VALUE "InternalName", "FLOCKING"
+            VALUE "LegalCopyright", "Copyright © 2010 Anders Riggelsen"
+            VALUE "OriginalFilename", "Flocking.mfx"
+            VALUE "ProductVersion", "1, 0, 0, 0"
+            VALUE "SpecialBuild", "00000001"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RCDATA
+//
+
+KPX_MAGICNUMBER RCDATA 
+BEGIN
+    0x2516, 0x5908
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+#if defined(APSTUDIO_INVOKED) || defined(EDITOR)
+#if defined(APSTUDIO_INVOKED)
+EXO_ICON$(EDITOR)       BITMAP                  "EXTICON.BMP"
+#else
+EXO_ICON                BITMAP                  "EXTICON.BMP"
+#endif
+#endif
+#if defined(APSTUDIO_INVOKED) || defined(EDITOR)
+#if defined(APSTUDIO_INVOKED)
+EXO_IMAGE$(EDITOR)      BITMAP                  "EXTICON.BMP"
+#else
+EXO_IMAGE               BITMAP                  "EXTICON.BMP"
+#endif
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+#if defined(APSTUDIO_INVOKED) || defined(EDITOR)
+#if defined(APSTUDIO_INVOKED)
+MN_CONDITIONS$(EDITOR) MENU 
+#else
+MN_CONDITIONS MENU 
+#endif
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "On looped boid",              ID_ONLOOPEDBOID
+    END
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDITOR)
+#if defined(APSTUDIO_INVOKED)
+MN_ACTIONS$(EDITOR) MENU 
+#else
+MN_ACTIONS MENU 
+#endif
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "Add object as boid",          ID_ADDOBJECTASBOID
+        MENUITEM "Remove object",               ID_REMOVEOBJECT
+        MENUITEM SEPARATOR
+        POPUP "Set boid type attributes"
+        BEGIN
+            MENUITEM "Set idle speed",              ID_SETIDLESPEED
+            MENUITEM "Set min speed",               ID_SETMINSPEED
+            MENUITEM "Set max speed",               ID_SETMAXSPEED
+            MENUITEM "Set acceleration",            ID_SETACCELERATION
+            MENUITEM "Set deceleration",            ID_SETDECELERATION
+            MENUITEM "Set max turn speed",          ID_SETTURNSPEED
+            MENUITEM SEPARATOR
+            MENUITEM "Set view radius",             ID_SETVIEWRADIUS
+            MENUITEM "Set avoidance radius",        ID_SETAVOIDANCERADIUS
+            MENUITEM "Set movement randomization",  ID_SETMOVEMENTRANDOMIZATION
+            MENUITEM SEPARATOR
+            MENUITEM "Set separation weight",       ID_SETSEPARATIONWEIGHT
+            MENUITEM "Set alignment weight",        ID_SETALIGNMENTWEIGHT
+            MENUITEM "Set cohesion weight",         ID_SETCOHESIONWEIGHT
+            MENUITEM SEPARATOR
+            MENUITEM "Set angle/direction setting", ID_SETANGLEDIRSETTING
+            MENUITEM "Set speed dependant turn setting", ID_SETSPEEDDEPENDANTTURN
+            MENUITEM "Avoid obstacles?",            ID_SETAVOIDOBSTACLES
+        END
+        POPUP "Control boids"
+        BEGIN
+            POPUP "All of type"
+            BEGIN
+                MENUITEM "Attract towards position",    ID_ALLOFTYPE_ATTRACTTOWARDSPOSITION
+                MENUITEM "Chase away from position",    ID_ALLOFTYPE_CHASEAWAYFROMPOSITION
+                MENUITEM "Apply force (xy-direction)",  ID_ALLOFTYPE_APPLYFORCE
+            END
+            POPUP "Within radius"
+            BEGIN
+                MENUITEM "Attract toward position",     ID_WITHINRADIUS_ATTRACTTOWARDPOSITION
+                MENUITEM "Chase away from position",    ID_WITHINRADIUS_CHASEAWAYFROMPOSITION
+                MENUITEM "Apply force (xy-direction)",  ID_WITHINRADIUS_APPLYFORCE
+            END
+            POPUP "Individual boids"
+            BEGIN
+                MENUITEM "Attract towards position",    ID_SINGLEBOID_ATTRACTTOWARDSPOSITION
+                MENUITEM "Chase away from position",    ID_SINGLEBOID_CHASEAWAYFROMPOSITION
+                MENUITEM "Apply force (xy-direction)",  ID_SINGLEBOID_APPLYFORCE
+            END
+        END
+        MENUITEM SEPARATOR
+        POPUP "Loop boids"
+        BEGIN
+            MENUITEM "Loop all boids",              ID_LOOPALLBOIDS
+            MENUITEM "Loop all boids of type",      ID_LOOPALLOFTYPE
+            MENUITEM "Loop neighbour boids",        ID_LOOPNEIGHBOURBOIDS
+            MENUITEM "Loop boids in radius",        ID_LOOPBOIDSINRADIUS
+            MENUITEM "Loop boids in rectangle",     ID_LOOPBOIDSINRECTANGLE
+        END
+        MENUITEM SEPARATOR
+    END
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDITOR)
+#if defined(APSTUDIO_INVOKED)
+MN_EXPRESSIONS$(EDITOR) MENU 
+#else
+MN_EXPRESSIONS MENU 
+#endif
+BEGIN
+    POPUP ""
+    BEGIN
+        POPUP "From boid type"
+        BEGIN
+            MENUITEM "Get idle speed",              ID_FROMBOIDTYPE_GETIDLESPEED
+            MENUITEM "Get min speed",               ID_FROMBOIDTYPE_GETMINSPEED
+            MENUITEM "Get max speed",               ID_FROMBOIDTYPE_GETMAXSPEED
+            MENUITEM "Get acceleration",            ID_FROMBOIDTYPE_GETACCELERATION
+            MENUITEM "Get deceleration",            ID_FROMBOIDTYPE_GETDECELERATION
+            MENUITEM SEPARATOR
+            MENUITEM "Get turn speed",              ID_FROMBOIDTYPE_GETTURNSPEED
+            MENUITEM "Get view radius",             ID_FROMBOIDTYPE_GETVIEWRADIUS
+            MENUITEM "Get avoidance radius",        ID_FROMBOIDTYPE_GETAVOIDANCERADIUS
+            MENUITEM "Get movement randomization",  ID_FROMBOIDTYPE_GETRANDOMIZATION
+            MENUITEM SEPARATOR
+            MENUITEM "Get separation weight",       ID_FROMBOIDTYPE_GETSEPARATIONWEIGHT
+            MENUITEM "Get alignment weight",        ID_FROMBOIDTYPE_GETALIGNMENTWEIGHT
+            MENUITEM "Get cohesion weight",         ID_FROMBOIDTYPE_GETCOHESIONWEIGHT
+        END
+        POPUP "From object"
+        BEGIN
+            MENUITEM "Get angle",                   ID_FROMOBJECT_GETANGLE
+            MENUITEM "Get speed",                   ID_FROMOBJECT_GETSPEED
+            MENUITEM "Get x-speed",                 ID_FROMOBJECT_GETXSPEED
+            MENUITEM "Get y-speed",                 ID_FROMOBJECT_GETYSPEED
+            MENUITEM "Get target X",                ID_FROMOBJECT_GETTARGETX
+            MENUITEM "Get target Y",                ID_FROMOBJECT_GETTARGETY
+        END
+        POPUP "From currently looped boid"
+        BEGIN
+            MENUITEM "Get angle",                   ID_LOOPCURRENT_GETANGLE
+            MENUITEM "Get speed",                   ID_LOOPCURRENT_GETSPEED
+            MENUITEM "Get x-speed",                 ID_LOOPCURRENT_GETXSPEED
+            MENUITEM "Get y-speed",                 ID_LOOPCURRENT_GETYSPEED
+            MENUITEM "Get target X",                ID_LOOPCURRENT_GETTARGETX
+            MENUITEM "Get target Y",                ID_LOOPCURRENT_GETTARGETY
+        END
+        MENUITEM SEPARATOR
+    END
+END
+#endif
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""..\\..\\Inc\\ccx.h""\r\n"
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    KPX_MARK                "MF2"
+    KPX_NAME                "Flocking"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PROP_SPEEDDEPENDANTTURN "Turn speed depends on speed"
+    IDS_PROPINFO_SPEEDDEPENDANTTURN 
+                            "Makes the boid turn slower if it has low speed. A speed of 0 means it cannot turn."
+    IDS_SPEEDDEPENDANTTURN  "Should turn speed depend on the boid speed? (0=NO, 1=YES)"
+    IDS_AVOIDOBSTACLESETTING "Avoid obstacles? (0=NO, 1=YES)"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PROPINFO_ACCELERATION "How fast the boids accelerate"
+    IDS_PROPINFO_DECELERATION "How fast the boids loose speed again"
+    IDS_PROPINFO_TURNSPEED  "The maximum turning speed of the boid"
+    IDS_PROPINFO_VIEWRADIUS "How far the boids can see (used for alignment and cohesion)"
+    IDS_PROPINFO_AVOIDANCERADIUS 
+                            "How far away from each other the boids prefer to be."
+    IDS_PROPINFO_RANDOMIZATION "How randomly the boids should move"
+    IDS_PROPINFO_ANGLEDIRSETTING 
+                            "Use angles or directions do show the different headings of the boids"
+    IDS_PROPINFO_SEPARATIONWEIGHT "Steer to avoid crowding local flockmates"
+    IDS_PROPINFO_ALIGNMENTWEIGHT 
+                            "Steer towards the average heading of local flockmates"
+    IDS_PROPINFO_COHESIONWEIGHT 
+                            "Steer to move toward the average position of local flockmates"
+    IDS_PROP_AVOIDOBSTACLES "Avoid obstacles"
+    IDS_PROPINFO_AVOIDOBSTACLES 
+                            "Boids will avoid MMF2 obstacles just as they avoid other boids"
+    IDS_PROP_MINSPEED       "Min speed"
+    IDS_PROPINFO_MINSPEED   "Speed lower bound. Can be negative for reverse movement."
+    IDS_MINSPEED            "Enter a min speed (in pixels per time unit) Can be negative for reverse movement"
+    IDS_USENONE             "Don't rotate"
+END
+
+STRINGTABLE 
+BEGIN
+    IDST_OBJNAME            "Flocking"
+    IDST_AUTHOR             "Anders Riggelsen"
+    IDST_COPYRIGHT          "Copyright © 2011 Anders Riggelsen"
+    IDST_COMMENT            "Add objects to a flock of automatically moving objects that ""flock"" together."
+    IDST_HTTP               "http://www.andersriggelsen.dk"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BOIDTYPE            "Boid type number"
+    IDS_XPOSITION           "X-position"
+    IDS_YPOSITION           "Y-Position"
+    IDS_XSPEED              "X-Speed"
+    IDS_YSPEED              "Y-Speed"
+    IDS_RADIUS              "Radius"
+    IDS_ANGLE               "Angle"
+    IDS_STRENGTH            "Strength"
+    IDS_FIXEDVALUE          "fixed value"
+    IDS_EXPBOIDTYPE         "boid-type"
+    IDS_SELECTOBJECT        "Select an object"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_WEIGHT              "Weight"
+    IDS_LOOPNAME            "Enter a name for the loop"
+    IDS_SPEED               "Enter a speed (in pixels per time unit)"
+    IDS_MAXSPEED            "Enter a max speed (in pixels per time unit)"
+    IDS_ACCELERATION        "Enter an acceleration (max change in pixels per time unit)"
+    IDS_DECELERATION        "Enter a deceleration (max change in pixels per time unit)"
+    IDS_TURNSPEED           "Enter a max turn speed (max angles per time unit)"
+    IDS_RANDOMIZATION       "Enter a movement randomization value"
+    IDS_ANGLEDIRSETTING     "Set angle/dir setting (0=use angles, 1=use directions, 2=don't rotate)"
+    IDS_WIDTH               "Width in pixels"
+    IDS_HEIGHT              "Height in pixels"
+    IDS_USEANGLES           "Use angles"
+    IDS_USEDIRECTIONS       "Use directions"
+    IDS_DEFAULTPARAMETERS   "Default boid parameters"
+    IDS_PROP_IDLESPEED      "Idle speed"
+    IDS_PROP_MAXSPEED       "Max speed"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADDOBJECTASBOID      "Add %0 as boid type %1"
+    ID_REMOVEOBJECT         "Remove %0"
+    ID_SETIDLESPEED         "Boid %0: Set idle speed %1"
+    ID_SETMINSPEED          "Boid %0: Set min speed: %1"
+    ID_SETMAXSPEED          "Boid %0: Set max speed: %1"
+    ID_SETACCELERATION      "Boid %0: Set acceleration: %1"
+    ID_SETDECELERATION      "Boid %0: Set deceleration: %1"
+    ID_SETTURNSPEED         "Boid %0: Set turn speed: %1"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SETVIEWRADIUS        "Boid %0: Set view radius: %1"
+    ID_SETAVOIDANCERADIUS   "Boid %0: Set avoidance radius: %1"
+    ID_SETMOVEMENTRANDOMIZATION "Boid %0: Set movement randomization: %1"
+    ID_SETSEPARATIONWEIGHT  "Boid %0: Set separation weight: %1"
+    ID_SETALIGNMENTWEIGHT   "Boid %0: Set alignment weight: %1"
+    ID_SETCOHESIONWEIGHT    "Boid %0: Set cohesion weight: %1"
+    ID_SETANGLEDIRSETTING   "Boid %0: Set angle/dir setting to: %1"
+    ID_SETSPEEDDEPENDANTTURN "Boid %0: Set speed dependant turn setting: %1"
+    ID_SETAVOIDOBSTACLES    "Boid %0: Set avoid obstacles setting: %1"
+    ID_ALLOFTYPE_ATTRACTTOWARDSPOSITION 
+                            "Attract all boids of type %0 towards (%1,%2) weight: %3"
+    ID_ALLOFTYPE_CHASEAWAYFROMPOSITION 
+                            "Chase all boids of type %0 away from (%1,%2) weight: %3"
+    ID_ALLOFTYPE_APPLYFORCE "To boid type %0, apply force (%1,%2)"
+    ID_WITHINRADIUS_ATTRACTTOWARDPOSITION 
+                            "Attract all boids of type %0 towards (%1,%2) within radius %3 weight: %4"
+    ID_WITHINRADIUS_CHASEAWAYFROMPOSITION 
+                            "Chase all boids of type %0 away from (%1,%2) within radius %3 weight: %4"
+    ID_WITHINRADIUS_APPLYFORCE 
+                            "To boid type %0, apply force (%4,%5) within radius %3 from (%1,%2)"
+    ID_SINGLEBOID_ATTRACTTOWARDSPOSITION 
+                            "Attract %0 towards (%1,%2) weight: %3"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SINGLEBOID_CHASEAWAYFROMPOSITION 
+                            "Chase %0 away from (%1,%2) weight: %3"
+    ID_SINGLEBOID_APPLYFORCE "Apply force (%1,%2) to %0"
+    ID_LOOPNEIGHBOURBOIDS   "Loop through neighbouring boids to %1 within radius %2 with loop name %0"
+    ID_LOOPBOIDSINRADIUS    "Loop through all boids within radius %3 from position [%1, %2] with loop name %0"
+    ID_LOOPBOIDSINRECTANGLE "Loop through all boids within rectangle x:%1 y:%2 w:%3 h:%4 with loop name %0"
+    ID_LOOPALLBOIDS         "Loop through all boids with loop name %0"
+    ID_LOOPALLOFTYPE        "Loop through all boids of type %1 with loop name %0"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PROP_ACCELERATION   "Acceleration"
+    IDS_PROP_DECELERATION   "Deceleration"
+    IDS_PROP_TURNSPEED      "Turn speed"
+    IDS_PROP_VIEWRADIUS     "View radius"
+    IDS_PROP_AVOIDANCERADIUS "Avoidance radius"
+    IDS_PROP_RANDOMIZATION  "Randomization"
+    IDS_PROP_ANGLEDIRSETTING "Angle mode"
+    IDS_DEFAULTWEIGHTS      "Default weights"
+    IDS_PROP_SEPARATIONWEIGHT "Separation"
+    IDS_PROP_ALIGNMENTWEIGHT "Alignment"
+    IDS_PROP_COHESIONWEIGHT "Cohesion"
+    IDS_FLOCKINGHEADER_TITLE "Flocking object setup"
+    IDS_PROP_CELLSIZE       "Cell size"
+    IDS_PROPINFO_CELLSIZE   "Best if slightly bigger than the view radius of the most common boid-type."
+    IDS_PROPINFO_IDLESPEED  "How fast the boids move when they have nothing else to do."
+    IDS_PROPINFO_MAXSPEED   "The maximum speed of the boids"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ONLOOPEDBOID         "%o: On loop %0 for boid %1"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FROMBOIDTYPE_GETIDLESPEED "IdleSpeed("
+    ID_FROMBOIDTYPE_GETMINSPEED "MinSpeed("
+    ID_FROMBOIDTYPE_GETMAXSPEED "MaxSpeed("
+    ID_FROMBOIDTYPE_GETACCELERATION "Acceleration("
+    ID_FROMBOIDTYPE_GETDECELERATION "Deceleration("
+    ID_FROMBOIDTYPE_GETTURNSPEED "TurnSpeed("
+    ID_FROMBOIDTYPE_GETAVOIDANCERADIUS "AvoidanceRadius("
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FROMBOIDTYPE_GETRANDOMIZATION "MovementRandomization("
+    ID_FROMBOIDTYPE_GETVIEWRADIUS "ViewRadius("
+    ID_FROMBOIDTYPE_GETSEPARATIONWEIGHT "SeparationWeight("
+    ID_FROMBOIDTYPE_GETALIGNMENTWEIGHT "AlignmentWeight("
+    ID_FROMBOIDTYPE_GETCOHESIONWEIGHT "CohesionWeight("
+    ID_FROMOBJECT_GETANGLE  "AngleFromFixed("
+    ID_FROMOBJECT_GETSPEED  "SpeedFromFixed("
+    ID_FROMOBJECT_GETXSPEED "XSpeedFromFixed("
+    ID_FROMOBJECT_GETYSPEED "YSpeedFromFixed("
+    ID_FROMOBJECT_GETTARGETX "TargetXFromFixed("
+    ID_FROMOBJECT_GETTARGETY "TargetYFromFixed("
+    ID_LOOPCURRENT_GETANGLE "AngleFromCurrent("
+    ID_LOOPCURRENT_GETSPEED "SpeedFromCurrent("
+    ID_LOOPCURRENT_GETXSPEED "XSpeedFromCurrent("
+    ID_LOOPCURRENT_GETYSPEED "YSpeedFromCurrent("
+    ID_LOOPCURRENT_GETTARGETX "TargetXFromCurrent("
+END
+
+STRINGTABLE 
+BEGIN
+    ID_LOOPCURRENT_GETTARGETY "TargetYFromCurrent("
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
