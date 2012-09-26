@@ -316,7 +316,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="Copy file to installer directory"
-				CommandLine="copy $(TargetPath) &quot;%ProgramFiles(x86)%\Multimedia Fusion Developer 2\Extensions\&quot;&#x0D;&#x0A;copy $(TargetPath) &quot;ToInstall\Files\Extensions\&quot;&#x0D;&#x0A;"
+				CommandLine="copy $(TargetPath) &quot;%ProgramFiles(x86)%\Multimedia Fusion Developer 2\Extensions\&quot;&#x0D;&#x0A;copy $(TargetPath) &quot;ToInstall\Extensions\&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -722,7 +722,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="Copy file to installer directory"
-				CommandLine="copy $(TargetPath) &quot;%ProgramFiles(x86)%\Multimedia Fusion Developer 2\Data\Runtime\&quot;&#x0D;&#x0A;copy $(TargetPath) &quot;ToInstall\Files\Data\Runtime\&quot;&#x0D;&#x0A;"
+				CommandLine="copy $(TargetPath) &quot;%ProgramFiles(x86)%\Multimedia Fusion Developer 2\Data\Runtime\&quot;&#x0D;&#x0A;copy $(TargetPath) &quot;ToInstall\Data\Runtime\&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
