@@ -364,7 +364,7 @@ short WINAPI DLLExport act_allOfType_attractTowardsPosition(LPRDATA rdPtr, long 
 		Boid & boid = it->second;
 		if(boid.boidType == type)
 		{
-			float invDistance = 1.0f/sqrt(pow(boid.x-posX,2.0f)+pow(boid.y-posY,2.0f));
+			float invDistance = 1.0f/sqrtf(pow(boid.x-posX,2.0f)+pow(boid.y-posY,2.0f));
 			boid.forceX += (posX - boid.x) * invDistance * weight;
 			boid.forceY += (posY - boid.y) * invDistance * weight;
 		}
@@ -388,7 +388,7 @@ short WINAPI DLLExport act_allOfType_chaseAwayFromPosition(LPRDATA rdPtr, long p
 		Boid & boid = it->second;
 		if(boid.boidType == type)
 		{
-			float invDistance = 1.0f/sqrt(pow(boid.x-posX,2.0f)+pow(boid.y-posY,2.0f));
+			float invDistance = 1.0f/sqrtf(pow(boid.x-posX,2.0f)+pow(boid.y-posY,2.0f));
 			boid.forceX += (boid.x - posX) * invDistance * weight;
 			boid.forceY += (boid.y - posY) * invDistance * weight;
 		}
@@ -458,7 +458,7 @@ short WINAPI DLLExport act_withinRadius_attractTowardsPosition(LPRDATA rdPtr, lo
 
 				float diffX = boid.x-posX;
 				float diffY = boid.y-posY;
-				float distance = sqrt(diffX*diffX+diffY*diffY);
+				float distance = sqrtf(diffX*diffX+diffY*diffY);
 				if(distance < radius)
 				{
 					float factor = 1.0f - (distance / radius);
@@ -507,7 +507,7 @@ short WINAPI DLLExport act_withinRadius_chaseAwayFromPosition(LPRDATA rdPtr, lon
 
 				float diffX = boid.x-posX;
 				float diffY = boid.y-posY;
-				float distance = sqrt(diffX*diffX+diffY*diffY);
+				float distance = sqrtf(diffX*diffX+diffY*diffY);
 				if(distance < radius)
 				{
 					float factor = 1.0f - (distance / radius);
@@ -557,7 +557,7 @@ short WINAPI DLLExport act_withinRadius_applyForce(LPRDATA rdPtr, long param1, l
 
 				float diffX = boid.x-posX;
 				float diffY = boid.y-posY;
-				float distance = sqrt(diffX*diffX+diffY*diffY);
+				float distance = sqrtf(diffX*diffX+diffY*diffY);
 				if(distance < radius)
 				{
 					float factor = 1.0f - (distance / radius);
@@ -635,7 +635,7 @@ short WINAPI DLLExport act_singleBoid_chaseAwayFromPosition(LPRDATA rdPtr, long 
 		Boid & boid = it->second;
 		if(boid.fixedValue == fixed)
 		{
-			float invDistance = 1.0f/sqrt(pow(boid.x-posX,2.0f)+pow(boid.y-posY,2.0f));
+			float invDistance = 1.0f/sqrtf(pow(boid.x-posX,2.0f)+pow(boid.y-posY,2.0f));
 			boid.forceX += (boid.x - posX) * invDistance * weight;
 			boid.forceY += (boid.y - posY) * invDistance * weight;
 			return 0;
@@ -758,7 +758,7 @@ short WINAPI DLLExport act_loopBoidsInRadius(LPRDATA rdPtr, long param1, long pa
 				Boid & boid = cellit->second;
 				float xDist = xPos - boid.x;
 				float yDist = yPos - boid.y;
-				float distance = sqrt(xDist*xDist + yDist*yDist);
+				float distance = sqrtf(xDist*xDist + yDist*yDist);
 
 				if(distance >= radius)
 					continue;

@@ -110,6 +110,8 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 		Boid & boid = it->second;
 		BoidType & boidtype = rdPtr->boidtypes[boid.boidType];
 		LPRO object = LPROFromFixed(rdPtr, boid.fixedValue);
+		float viewRadiusSquared = boidtype.viewRadius*boidtype.viewRadius;
+		float avoidanceRadiusSquared = boidtype.avoidanceRadius*boidtype.avoidanceRadius;
 
 		if(object == NULL)
 		{
@@ -158,9 +160,12 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 					//avoid the checked boid testing itself
 					if( neighbour.fixedValue != boid.fixedValue )
 					{
-						float distance = sqrt(pow(neighbour.x - boid.x, 2.0f) + pow(neighbour.y - boid.y, 2.0f));
-						if(distance < boidtype.viewRadius)
+						float dX = neighbour.x - boid.x;
+						float dY = neighbour.y - boid.y;
+						float distanceSquared = dX*dX + dY*dY;
+						if(distanceSquared < viewRadiusSquared)
 						{
+							float distance = sqrtf(distanceSquared);
 							if(neighbour.boidType == boid.boidType)
 							{
 								++boid.aliCohNeighbourCount;
@@ -208,7 +213,7 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 			}
 			if(countWalls>0)
 			{
-				float distance = sqrt(wallX*wallX + wallY*wallY);
+				float distance = sqrtf(wallX*wallX + wallY*wallY);
 				float escapeFactor = 1.0f - distance/boidtype.avoidanceRadius;		
 
 				++boid.sepNeighbourCount;
@@ -229,7 +234,7 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 		boid.targetY += boid.sepY * boidtype.separationWeight + boid.cohY * boidtype.cohesionWeight;
 		
 		//Normalize average angle
-		float aliDirLength = sqrt(boid.aliX*boid.aliX + boid.aliY*boid.aliY);
+		float aliDirLength = sqrtf(boid.aliX*boid.aliX + boid.aliY*boid.aliY);
 		if(aliDirLength > 0.001f)
 		{
 			boid.targetX += boid.aliX/aliDirLength * boidtype.alignmentWeight;
@@ -263,15 +268,15 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 		}
 
 		//Calculate the vector length to the target position
-		boid.targetDistance = max(sqrt(boid.targetX*boid.targetX + boid.targetY*boid.targetY), 0.00001f);
+		boid.targetDistance = max(sqrtf(boid.targetX*boid.targetX + boid.targetY*boid.targetY), 0.00001f);
 
 		//Update the direction information for the boid
 		float invNeg = 1.0f/boid.targetDistance;
 		float newDirX = boid.targetX * invNeg;
 		float newDirY = boid.targetY * invNeg;
 		float newDirAngle = boid.dirAngle;
-		if((newDirX > 0.0001f || newDirX < -0.0001f) && (newDirY > 0.0001f || newDirY < -0.0001f))
-			newDirAngle = ToDegrees(atan2(newDirY, newDirX));
+		if(boid.targetDistance > 0.001f)
+			newDirAngle = ToDegrees(atan2f(newDirY, newDirX));
 
 		//Calculate dot product between the old direction and the target direction
 		float cosO = boid.dirX*newDirX + boid.dirY*newDirY;
@@ -348,7 +353,7 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 				//No previous position recorded, cannot reliably push out
 				if( !(dX == 0 && dY == 0))
 				{
-					int distance = (int)ceil(sqrt((float)(dX*dX+dY*dY)));
+					int distance = (int)ceil(sqrtf((float)(dX*dX+dY*dY)));
 					for(int i=0; i<distance; ++i)
 					{
 						float step = i/(float)distance;
