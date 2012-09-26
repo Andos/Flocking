@@ -1,0 +1,9 @@
+#Ignore any local extensions
+Debug/
+Release_Small/
+Run_Only_Small/
+ToInstall/
+
+*.ncb
+*.suo
+*.user
