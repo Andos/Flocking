@@ -133,10 +133,10 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 		boid.targetY = 0.0f;
 
 		//Find all cells inside the radius:
-		int startCellX = (int)floor((boid.x - boidtype.viewRadius)/cellsize);
-		int endCellX = (int)ceil((boid.x + boidtype.viewRadius)/cellsize);
-		int startCellY = (int)floor((boid.y - boidtype.viewRadius)/cellsize);
-		int endCellY = (int)ceil((boid.y + boidtype.viewRadius)/cellsize);
+		int startCellX = (int)floorf((boid.x - boidtype.viewRadius)/cellsize);
+		int endCellX = (int)ceilf((boid.x + boidtype.viewRadius)/cellsize);
+		int startCellY = (int)floorf((boid.y - boidtype.viewRadius)/cellsize);
+		int endCellY = (int)ceilf((boid.y + boidtype.viewRadius)/cellsize);
 
 		for(int y = startCellY; y<endCellY; ++y)
 		{

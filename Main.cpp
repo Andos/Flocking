@@ -364,7 +364,9 @@ short WINAPI DLLExport act_allOfType_attractTowardsPosition(LPRDATA rdPtr, long 
 		Boid & boid = it->second;
 		if(boid.boidType == type)
 		{
-			float invDistance = 1.0f/sqrtf(pow(boid.x-posX,2.0f)+pow(boid.y-posY,2.0f));
+			float dX = boid.x-posX;
+			float dY = boid.y-posY;
+			float invDistance = 1.0f/sqrtf(dX*dX+dY*dY);
 			boid.forceX += (posX - boid.x) * invDistance * weight;
 			boid.forceY += (posY - boid.y) * invDistance * weight;
 		}
@@ -388,7 +390,9 @@ short WINAPI DLLExport act_allOfType_chaseAwayFromPosition(LPRDATA rdPtr, long p
 		Boid & boid = it->second;
 		if(boid.boidType == type)
 		{
-			float invDistance = 1.0f/sqrtf(pow(boid.x-posX,2.0f)+pow(boid.y-posY,2.0f));
+			float dX = boid.x-posX;
+			float dY = boid.y-posY;
+			float invDistance = 1.0f/sqrtf(dX*dX+dY*dY);
 			boid.forceX += (boid.x - posX) * invDistance * weight;
 			boid.forceY += (boid.y - posY) * invDistance * weight;
 		}
@@ -435,10 +439,10 @@ short WINAPI DLLExport act_withinRadius_attractTowardsPosition(LPRDATA rdPtr, lo
 	CellMap::iterator lastElement;
 
 	float cellsize = (float)rdPtr->cellsize;
-	int startCellX = (int)floor((posX - radius)/cellsize);
-	int endCellX = (int)ceil((posX + radius)/cellsize);
-	int startCellY = (int)floor((posY - radius)/cellsize);
-	int endCellY = (int)ceil((posY + radius)/cellsize);
+	int startCellX = (int)floorf((posX - radius)/cellsize);
+	int endCellX = (int)ceilf((posX + radius)/cellsize);
+	int startCellY = (int)floorf((posY - radius)/cellsize);
+	int endCellY = (int)ceilf((posY + radius)/cellsize);
 
 	for(int y = startCellY; y<endCellY; ++y)
 	{
@@ -484,10 +488,10 @@ short WINAPI DLLExport act_withinRadius_chaseAwayFromPosition(LPRDATA rdPtr, lon
 	CellMap::iterator lastElement;
 
 	float cellsize = (float)rdPtr->cellsize;
-	int startCellX = (int)floor((posX - radius)/cellsize);
-	int endCellX = (int)ceil((posX + radius)/cellsize);
-	int startCellY = (int)floor((posY - radius)/cellsize);
-	int endCellY = (int)ceil((posY + radius)/cellsize);
+	int startCellX = (int)floorf((posX - radius)/cellsize);
+	int endCellX = (int)ceilf((posX + radius)/cellsize);
+	int startCellY = (int)floorf((posY - radius)/cellsize);
+	int endCellY = (int)ceilf((posY + radius)/cellsize);
 
 	for(int y = startCellY; y<endCellY; ++y)
 	{
@@ -534,10 +538,10 @@ short WINAPI DLLExport act_withinRadius_applyForce(LPRDATA rdPtr, long param1, l
 	CellMap::iterator lastElement;
 
 	float cellsize = (float)rdPtr->cellsize;
-	int startCellX = (int)floor((posX - radius)/cellsize);
-	int endCellX = (int)ceil((posX + radius)/cellsize);
-	int startCellY = (int)floor((posY - radius)/cellsize);
-	int endCellY = (int)ceil((posY + radius)/cellsize);
+	int startCellX = (int)floorf((posX - radius)/cellsize);
+	int endCellX = (int)ceilf((posX + radius)/cellsize);
+	int startCellY = (int)floorf((posY - radius)/cellsize);
+	int endCellY = (int)ceilf((posY + radius)/cellsize);
 
 	for(int y = startCellY; y<endCellY; ++y)
 	{
@@ -635,7 +639,9 @@ short WINAPI DLLExport act_singleBoid_chaseAwayFromPosition(LPRDATA rdPtr, long 
 		Boid & boid = it->second;
 		if(boid.fixedValue == fixed)
 		{
-			float invDistance = 1.0f/sqrtf(pow(boid.x-posX,2.0f)+pow(boid.y-posY,2.0f));
+			float dX = boid.x-posX;
+			float dY = boid.y-posY;
+			float invDistance = 1.0f/sqrtf(dX*dX+dY*dY);
 			boid.forceX += (boid.x - posX) * invDistance * weight;
 			boid.forceY += (boid.y - posY) * invDistance * weight;
 			return 0;
@@ -738,10 +744,10 @@ short WINAPI DLLExport act_loopBoidsInRadius(LPRDATA rdPtr, long param1, long pa
 	int top = yPos-radius;
 	int bottom = yPos+radius;
 
-	int startCellX = (int)floor(left/cellsize);
-	int endCellX = (int)ceil(right/cellsize);
-	int startCellY = (int)floor(top/cellsize);
-	int endCellY = (int)ceil(bottom/cellsize);
+	int startCellX = (int)floorf(left/cellsize);
+	int endCellX = (int)ceilf(right/cellsize);
+	int startCellY = (int)floorf(top/cellsize);
+	int endCellY = (int)ceilf(bottom/cellsize);
 
 	for(int y = startCellY; y<endCellY; ++y)
 	{
@@ -806,10 +812,10 @@ short WINAPI DLLExport act_loopBoidsInRectangle(LPRDATA rdPtr, long param1, long
 
 	std::vector<Boid> foundBoids = std::vector<Boid>();
 
-	int startCellX = (int)floor(xPos/cellsize);
-	int endCellX = (int)ceil(right/cellsize);
-	int startCellY = (int)floor(yPos/cellsize);
-	int endCellY = (int)ceil(bottom/cellsize);
+	int startCellX = (int)floorf(xPos/cellsize);
+	int endCellX = (int)ceilf(right/cellsize);
+	int startCellY = (int)floorf(yPos/cellsize);
+	int endCellY = (int)ceilf(bottom/cellsize);
 
 	for(int y = startCellY; y<endCellY; ++y)
 	{
