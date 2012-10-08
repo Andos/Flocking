@@ -278,6 +278,7 @@ BEGIN
                             "Makes the boid turn slower if it has low speed. A speed of 0 means it cannot turn."
     IDS_SPEEDDEPENDANTTURN  "Should turn speed depend on the boid speed? (0=NO, 1=YES)"
     IDS_AVOIDOBSTACLESETTING "Avoid obstacles? (0=NO, 1=YES)"
+    IDS_HYBRIDDIRANGLE      "Hybrid dir/angle"
 END
 
 STRINGTABLE 

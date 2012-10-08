@@ -161,3 +161,5 @@ void LoopNeighbourBoids(LPRDATA rdPtr, char* loopname, Boid boid, int radius);
 
 Vec2i TracePosition(headerObject* rHo, int layer, Vec2i a, Vec2i b);
 float clamp(float val, float min, float max);
+
+float Q_rsqrt( float number );

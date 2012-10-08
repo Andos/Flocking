@@ -165,21 +165,21 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 						float distanceSquared = dX*dX + dY*dY;
 						if(distanceSquared < viewRadiusSquared)
 						{
-							float distance = sqrtf(distanceSquared);
+							//float distance = sqrtf(distanceSquared);
 							if(neighbour.boidType == boid.boidType)
 							{
 								++boid.aliCohNeighbourCount;
-								float influence = 1.0f - distance/boidtype.viewRadius;
+								float influence = 1.0f - distanceSquared/viewRadiusSquared;
 								boid.cohX += (neighbour.x - boid.x) * influence;
 								boid.cohY += (neighbour.y - boid.y) * influence;
 								boid.aliX += neighbour.dirX * influence;
 								boid.aliY += neighbour.dirY * influence;
 							}
-							if(distance < boidtype.avoidanceRadius)
+							if(distanceSquared < avoidanceRadiusSquared)
 							{
 								//The closer to the boid, the faster it will escape in the opposite direction.
 								++boid.sepNeighbourCount;
-								float escapeFactor = 1.0f - distance/boidtype.avoidanceRadius;
+								float escapeFactor = 1.0f - distanceSquared/avoidanceRadiusSquared;
 								boid.sepX += (boid.x - neighbour.x) * escapeFactor;
 								boid.sepY += (boid.y - neighbour.y) * escapeFactor;
 							}
@@ -213,8 +213,9 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 			}
 			if(countWalls>0)
 			{
-				float distance = sqrtf(wallX*wallX + wallY*wallY);
-				float escapeFactor = 1.0f - distance/boidtype.avoidanceRadius;		
+				//float distance = sqrtf(wallX*wallX + wallY*wallY);
+				float distanceSquared = wallX*wallX + wallY*wallY;
+				float escapeFactor = 1.0f - distanceSquared/avoidanceRadiusSquared;		
 
 				++boid.sepNeighbourCount;
 				boid.sepX += ((startpoint.x+wallX) - boid.x) * escapeFactor;
@@ -234,11 +235,12 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 		boid.targetY += boid.sepY * boidtype.separationWeight + boid.cohY * boidtype.cohesionWeight;
 		
 		//Normalize average angle
-		float aliDirLength = sqrtf(boid.aliX*boid.aliX + boid.aliY*boid.aliY);
-		if(aliDirLength > 0.001f)
+		float aliDirLengthSquared = boid.aliX*boid.aliX + boid.aliY*boid.aliY;
+		float invAliDirLength = Q_rsqrt(aliDirLengthSquared);
+		if(aliDirLengthSquared > 0.001f)
 		{
-			boid.targetX += boid.aliX/aliDirLength * boidtype.alignmentWeight;
-			boid.targetY += boid.aliY/aliDirLength * boidtype.alignmentWeight;
+			boid.targetX += boid.aliX * invAliDirLength * boidtype.alignmentWeight;
+			boid.targetY += boid.aliY * invAliDirLength * boidtype.alignmentWeight;
 		}
 
 		//Increment
@@ -268,12 +270,12 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 		}
 
 		//Calculate the vector length to the target position
-		boid.targetDistance = max(sqrtf(boid.targetX*boid.targetX + boid.targetY*boid.targetY), 0.00001f);
+		float invTargetDistance = Q_rsqrt(boid.targetX*boid.targetX + boid.targetY*boid.targetY);
+		boid.targetDistance = max(1.0f/invTargetDistance, 0.00001f);
 
 		//Update the direction information for the boid
-		float invNeg = 1.0f/boid.targetDistance;
-		float newDirX = boid.targetX * invNeg;
-		float newDirY = boid.targetY * invNeg;
+		float newDirX = boid.targetX * invTargetDistance;
+		float newDirY = boid.targetY * invTargetDistance;
 		float newDirAngle = boid.dirAngle;
 		if(boid.targetDistance > 0.001f)
 			newDirAngle = ToDegrees(atan2f(newDirY, newDirX));
@@ -353,7 +355,7 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 				//No previous position recorded, cannot reliably push out
 				if( !(dX == 0 && dY == 0))
 				{
-					int distance = (int)ceil(sqrtf((float)(dX*dX+dY*dY)));
+					int distance = (int)ceilf(1.0f/Q_rsqrt((float)(dX*dX+dY*dY)));
 					for(int i=0; i<distance; ++i)
 					{
 						float step = i/(float)distance;
