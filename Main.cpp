@@ -366,7 +366,7 @@ short WINAPI DLLExport act_allOfType_attractTowardsPosition(LPRDATA rdPtr, long 
 		{
 			float dX = boid.x-posX;
 			float dY = boid.y-posY;
-			float invDistance = 1.0f/sqrtf(dX*dX+dY*dY);
+			float invDistance = Q_rsqrt(dX*dX+dY*dY);
 			boid.forceX += (posX - boid.x) * invDistance * weight;
 			boid.forceY += (posY - boid.y) * invDistance * weight;
 		}
@@ -392,7 +392,7 @@ short WINAPI DLLExport act_allOfType_chaseAwayFromPosition(LPRDATA rdPtr, long p
 		{
 			float dX = boid.x-posX;
 			float dY = boid.y-posY;
-			float invDistance = 1.0f/sqrtf(dX*dX+dY*dY);
+			float invDistance = Q_rsqrt(dX*dX+dY*dY);
 			boid.forceX += (boid.x - posX) * invDistance * weight;
 			boid.forceY += (boid.y - posY) * invDistance * weight;
 		}
@@ -434,6 +434,7 @@ short WINAPI DLLExport act_withinRadius_attractTowardsPosition(LPRDATA rdPtr, lo
 	int posY = CNC_GetIntParameter(rdPtr);
 	int radius = CNC_GetIntParameter(rdPtr);
 	float weight = GetFloatParamEx(rdPtr);
+	float radiusSquared = radius*(float)radius;
 
 	CellMap::iterator cellit;
 	CellMap::iterator lastElement;
@@ -462,10 +463,10 @@ short WINAPI DLLExport act_withinRadius_attractTowardsPosition(LPRDATA rdPtr, lo
 
 				float diffX = boid.x-posX;
 				float diffY = boid.y-posY;
-				float distance = sqrtf(diffX*diffX+diffY*diffY);
-				if(distance < radius)
+				float distanceSquared = diffX*diffX+diffY*diffY;
+				if(distanceSquared < radiusSquared)
 				{
-					float factor = 1.0f - (distance / radius);
+					float factor = 1.0f - (distanceSquared / radiusSquared);
 					boid.forceX += (posX - boid.x) * factor * weight;
 					boid.forceY += (posY - boid.y) * factor * weight;
 				}
@@ -483,6 +484,7 @@ short WINAPI DLLExport act_withinRadius_chaseAwayFromPosition(LPRDATA rdPtr, lon
 	int posY = CNC_GetIntParameter(rdPtr);
 	int radius = CNC_GetIntParameter(rdPtr);
 	float weight = GetFloatParamEx(rdPtr);
+	float radiusSquared = radius*(float)radius;
 
 	CellMap::iterator cellit;
 	CellMap::iterator lastElement;
@@ -511,10 +513,10 @@ short WINAPI DLLExport act_withinRadius_chaseAwayFromPosition(LPRDATA rdPtr, lon
 
 				float diffX = boid.x-posX;
 				float diffY = boid.y-posY;
-				float distance = sqrtf(diffX*diffX+diffY*diffY);
-				if(distance < radius)
+				float distanceSquared = diffX*diffX+diffY*diffY;
+				if(distanceSquared < radiusSquared)
 				{
-					float factor = 1.0f - (distance / radius);
+					float factor = 1.0f - (distanceSquared / radiusSquared);
 					boid.forceX += (boid.x - posX) * factor * weight;
 					boid.forceY += (boid.y - posY) * factor * weight;
 				}
@@ -533,6 +535,7 @@ short WINAPI DLLExport act_withinRadius_applyForce(LPRDATA rdPtr, long param1, l
 	int radius = CNC_GetIntParameter(rdPtr);
 	float forceX = GetFloatParamEx(rdPtr);
 	float forceY = GetFloatParamEx(rdPtr);
+	float radiusSquared = radius*(float)radius;
 
 	CellMap::iterator cellit;
 	CellMap::iterator lastElement;
@@ -561,10 +564,10 @@ short WINAPI DLLExport act_withinRadius_applyForce(LPRDATA rdPtr, long param1, l
 
 				float diffX = boid.x-posX;
 				float diffY = boid.y-posY;
-				float distance = sqrtf(diffX*diffX+diffY*diffY);
-				if(distance < radius)
+				float distanceSquared = diffX*diffX+diffY*diffY;
+				if(distanceSquared < radiusSquared)
 				{
-					float factor = 1.0f - (distance / radius);
+					float factor = 1.0f - (distanceSquared / radiusSquared);
 					boid.forceX += forceX * factor;
 					boid.forceY += forceY * factor;
 				}
@@ -641,7 +644,7 @@ short WINAPI DLLExport act_singleBoid_chaseAwayFromPosition(LPRDATA rdPtr, long 
 		{
 			float dX = boid.x-posX;
 			float dY = boid.y-posY;
-			float invDistance = 1.0f/sqrtf(dX*dX+dY*dY);
+			float invDistance = Q_rsqrt(dX*dX+dY*dY);
 			boid.forceX += (boid.x - posX) * invDistance * weight;
 			boid.forceY += (boid.y - posY) * invDistance * weight;
 			return 0;
@@ -726,6 +729,7 @@ short WINAPI DLLExport act_loopBoidsInRadius(LPRDATA rdPtr, long param1, long pa
 	int xPos = CNC_GetIntParameter(rdPtr);
 	int yPos = CNC_GetIntParameter(rdPtr);
 	int radius = CNC_GetIntParameter(rdPtr);
+	float radiusSquared = radius*(float)radius;
 	if(rdPtr->numLoops >= 9)
 		return 0;
 	BoidLoop &currentLoop = rdPtr->boidLoops[rdPtr->numLoops];
@@ -764,9 +768,9 @@ short WINAPI DLLExport act_loopBoidsInRadius(LPRDATA rdPtr, long param1, long pa
 				Boid & boid = cellit->second;
 				float xDist = xPos - boid.x;
 				float yDist = yPos - boid.y;
-				float distance = sqrtf(xDist*xDist + yDist*yDist);
+				float distanceSquared = xDist*xDist + yDist*yDist;
 
-				if(distance >= radius)
+				if(distanceSquared >= radiusSquared)
 					continue;
 
 				foundBoids.push_back(boid);

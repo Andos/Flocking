@@ -118,6 +118,7 @@ typedef struct tagRDATA
 
 	int numLoops;
 	BoidLoop boidLoops[10];
+	int perfCounter;
 
 	Boid loopedBoid;
 	Boid centerBoid;

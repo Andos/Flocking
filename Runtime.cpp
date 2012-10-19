@@ -69,6 +69,8 @@ short WINAPI DLLExport CreateRunObject(LPRDATA rdPtr, LPEDATA edPtr, fpcob cobPt
 	rdPtr->numLoops = 0;
 	memset(&rdPtr->loopedBoid, 0, sizeof(Boid));
 
+	rdPtr->perfCounter = 0;
+
 	mv* mvI = rdPtr->rHo.hoAdRunHeader->rh4.rh4Mv;
 	rdPtr->hwa = mvI->mvCallFunction(NULL, EF_ISHWA, 0, 0, 0) == 1;
 	rdPtr->unicode = mvI->mvCallFunction(NULL, EF_ISUNICODE, 0, 0, 0) == 1;	
@@ -184,6 +186,8 @@ short WINAPI DLLExport HandleRunObject(LPRDATA rdPtr)
 								boid.sepY += (boid.y - neighbour.y) * escapeFactor;
 							}
 						}
+						else
+							rdPtr->perfCounter++;
 					}
 				}
 			}
